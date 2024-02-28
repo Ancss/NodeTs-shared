@@ -19,9 +19,11 @@ jobs:
       - run: npm install
       - run: npm run build
       - run: |
-          echo @Ancss:registry=https://npm.pkg.github.com/ > build/.npmrc
+          echo @Ancsshttps://npm.pkg.github.com/ > build/.npmrc
           echo '//npm.pkg.github.com/:_authToken=${NPM_TOKEN}' >> build/.npmrc
       - run: cat build/.npmrc
+      - name: Echo token
+        run: echo "GitHub_token: ${{ secrets.GITHUB_TOKEN }}"
       - run: npm publish
         working-directory: ./build
         env:
